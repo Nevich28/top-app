@@ -1,11 +1,18 @@
-import { Button, Htag, Paragraph, Rating, Tag } from '@/components';
+import { GetStaticProps } from 'next';
 import { useState } from 'react';
+import axios from 'axios';
 
-export default function Home(): JSX.Element {
+import { Button, Htag, Input, Paragraph, Rating, Tag, Textarea } from '@/components';
+import { withLayout } from '@/layout/Layout';
+import { MenuItem } from '@/interfaces/menu.interface';
+
+
+
+function Home({menu}: HomeProps): JSX.Element {
 	const [rating, setRating] = useState<number>(4);
 	return (
 		<>
-			<Htag tag='h1'>{5}</Htag>
+			<Htag tag='h1'>{process.env.NEXT_PUBLIC_DOMAIN + 'ghjk'}</Htag>
 			<Button appearance='primary' arrow='right'>Кнопка</Button>
 			<Button appearance='ghost' arrow='down'>Кнопка</Button>
 			<Paragraph size='s'>hjhjkhljkhlhjl</Paragraph>
@@ -16,6 +23,30 @@ export default function Home(): JSX.Element {
 			<Tag size='m' color='green'>Маленький</Tag>
 			<Tag color='grey'>Маленький</Tag>
 			<Rating rating={rating} isEditable setRating={setRating}/>
+			<Input placeholder='test'/>
+			<Textarea placeholder='test'/>
+			
 		</>
 	);
+}
+
+export default withLayout(Home);
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+	const firstCategory = 0;
+	
+	const {data: menu} = await axios.post<MenuItem[]>('https://courses-top.ru/api/top-page/find', {firstCategory});
+	// console.log('s' + process.env.NEXT_PUBLIC_DOMAIN);
+	// const {data: menu} = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {firstCategory});
+	return {
+		props: {
+			menu,
+			firstCategory
+		}
+	};
+};
+
+interface HomeProps extends Record<string, unknown>{
+	menu: MenuItem[];
+	firstCategory: number;
 }

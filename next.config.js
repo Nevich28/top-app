@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 // const nextConfig = {
-//   reactStrictMode: true,--legacy-peer-deps
+//   reactStrictMode: true,--legacy-peer-deps   mX9TsGVb52@r#X8
 // }
 
 // module.exports = nextConfig
