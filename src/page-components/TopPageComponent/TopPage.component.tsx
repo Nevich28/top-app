@@ -4,24 +4,31 @@ import styles from './TopPageComponent.module.css';
 import { HhData } from '@/components/hhData/HhData';
 import { TopLevelCategory } from '@/interfaces/page.interface';
 import { SortEnum } from '@/components/Sort/Sort.props';
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { sortReducer } from './sort.reducer';
+import { useScrollY } from '@/hooks/useScrollY';
 
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
 	const [{ products: sortedProducts, sort}, dispathSort] = useReducer(sortReducer, { products, sort: SortEnum.Rating });
+	const y=useScrollY();
 	const setSort = (sort: SortEnum) => {
 		dispathSort({type: sort});
 	};
+	useEffect(() => {
+		dispathSort({type: 'reset', initialState: products});
+	}, [products]);
+
 	return (
 		<div className={styles.wrapper}>
+			
 			<div className={styles.title}>
 				<Htag tag='h1'>{page.title}</Htag>
 				{products && <Tag color='grey' size='m'>{products.length}</Tag>}
 				<Sort sort={sort} setSort={setSort}/>
 			</div>
 			<div>
-				{sortedProducts && sortedProducts.map(p => (<Product key={p._id} product={p}/>))}
+				{sortedProducts && sortedProducts.map(p => (<Product layout key={p._id} product={p}/>))}
 			</div>
 			<div className={styles.hhtitle}>
 				<Htag tag='h2'>Вакансии - {page.category}</Htag>
