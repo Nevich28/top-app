@@ -1,16 +1,19 @@
 .footer {
 	display: grid;
-	padding: 25px 32px;
+	align-items: center;
+
 	min-height: 72px;
+	padding: 25px 32px;
+
+	color: var(--white);
+	background-color: var(--primary);
+
+	font-size: 16px;
+	line-height: 16px;
 	grid-template-columns: auto 1fr auto;
 	gap: 40px;
 	grid-template-areas:
-		"link1 link2 link3";
-	align-items: center;
-	background-color: var(--primary);
-	color: var(--white);
-	font-size: 16px;
-	line-height: 16px
+		"link1 link2 link3"
 }
 
 .footer a:hover {
@@ -30,9 +33,10 @@
 	grid-area: link3;
 }
 
-@media (max-width: 765px) {
+@media (width <= 765px) {
 	.footer {
 		grid-template-columns: auto;
+
 		justify-content: center;
 		gap: 20px;
 		grid-template-areas:
@@ -45,6 +49,7 @@
 	.link2,
 	.link3 {
 		justify-self: center;
+
 		/* margin: 10px 0; */
 	}
 }

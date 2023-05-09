@@ -2,8 +2,10 @@ html,
 body {
 	margin: 0;
 	padding: 0;
+
 	color: var(--black);
 	background: #F5F6F8;
+
 	font-family: 'Noto Sans', sans-serif;
 }
 
@@ -23,8 +25,8 @@ a {
 	--gray: #A4A4A4;
 	--gray-dark: #787D85;
 	--white: white;
-	--primary: #7351f5;
-	--primary-hover: #6344df;
+	--primary: #7351F5;
+	--primary-hover: #6344DF;
 	--red: #FC836D;
 	--red-light: #FEA291;
 	--green: #1DC37E;
